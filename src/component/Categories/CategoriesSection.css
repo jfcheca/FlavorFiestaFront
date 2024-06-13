@@ -1,0 +1,76 @@
+.banner-home {
+    width: 100%;
+    height: 300px; 
+    object-fit: cover;
+  }
+
+.categories-section {
+    display: flex;
+    justify-content: space-between;
+    width: 80%; 
+    height: auto; 
+    margin: 0 auto; 
+    gap: 20px; 
+    flex-wrap: wrap; 
+   
+  }
+  
+  /* Smartphones (portrait) */
+  @media (max-width: 480px) {
+    .categories-section {
+      flex-direction: column;
+    }
+  }
+  
+  /* Smartphones (landscape) */
+  @media (min-width: 481px) and (max-width: 767px) {
+    .categories-section {
+      flex-direction: column;
+    }
+  }
+  
+  /* Tablets */
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .categories-section {
+      flex-direction: row;
+      justify-content: space-around; 
+    }
+    .categories-section .category-card {
+      flex: 0 0 calc(50% - 40px); 
+    }
+  }
+  
+  /* Laptops */
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    .categories-section {
+      flex-direction: row;
+    }
+  }
+  
+  /* Desktops */
+  @media (min-width: 1281px) {
+    .categories-section {
+      flex-direction: row;
+    }
+  }
+
+
+
+
+  @media (max-width: 600px) {
+    .banner-home {
+      height: 200px; /* Ajusta este valor según tus necesidades */
+    }
+  }
+  
+  @media (min-width: 601px) {
+    .banner-home {
+      height: 300px; /* Ajusta este valor según tus necesidades */
+    }
+  }
+
+  @media (min-width: 1025px) {
+    .banner-home {
+      height: 500px; /* Ajusta este valor según tus necesidades */
+    }
+  }

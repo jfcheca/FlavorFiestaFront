@@ -1,0 +1,34 @@
+{
+    "recipes": [
+        {
+        "id": 1,
+        "title": "Receta",
+        "subtitle": "Beautiful landscapes",
+        "image": "https://i.ibb.co/GxjT1gz/recipe.jpg" 
+        },
+        {
+        "id": 2,
+        "title": "Crea tus cocteles",
+        "subtitle": "subtitle producto",
+        "image": "https://i.ibb.co/GxjT1gz/recipe.jpg" 
+        },
+        {
+            "id": 3,
+            "title": "Comparte",
+            "subtitle": "A break from the world",
+            "image":"https://i.ibb.co/GxjT1gz/recipe.jpg" 
+        },
+        {
+            "id": 4,
+            "title": "Mezcla",
+            "subtitle": "A break from the world",
+            "image": "https://i.ibb.co/GxjT1gz/recipe.jpg" 
+        },
+        {
+            "id": 5,
+            "title": "Crea tus cocteles",
+            "subtitle": "Big City",
+            "image":"https://i.ibb.co/GxjT1gz/recipe.jpg" 
+        }
+    ]
+}

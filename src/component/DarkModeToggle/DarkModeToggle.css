@@ -1,0 +1,60 @@
+/* DarkModeToggle.css */
+
+.dark-mode-toggle {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5em;
+  color: #CC2D4A
+}
+
+.dark-mode-toggle:hover {
+  color: #8b2235;
+}
+
+.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.dark-mode .Navbar {
+  background-color: #333;
+}
+
+.dark-mode .menu a {
+  color: #e0e0e0;
+}
+
+.dark-mode .product-card {
+  background-color: #1e1e1e;
+  border-color: #333;
+}
+
+.dark-mode .product-card .add-to-cart-button {
+  background-color: #444;
+}
+
+.dark-mode .product-card .add-to-cart-button:hover {
+  background-color: #666;
+}
+
+.dark-mode .product-card .favorite-button {
+  color: #bbb;
+}
+
+.dark-mode .product-card .favorite-button.favorited {
+  color: red;
+}
+.dark-mode .recipes {
+  background-color: #121212
+}
+
+.dark-mode .ingresa-tus-datos {
+  color: #fff
+}
+
+.dark-mode .bienvenida {
+  color: #fff
+}
+
+

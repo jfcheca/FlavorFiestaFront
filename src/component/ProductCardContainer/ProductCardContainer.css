@@ -1,0 +1,48 @@
+/* ProductCardContainer.css */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  
+  #root {
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .product-card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    width: calc(100% - 40px); /* Ajusta el margen izquierdo y derecho */
+    margin: 20px auto; /* Centra verticalmente y ajusta el margen superior e inferior */
+  }
+  
+  @media (min-width: 1200px) {
+    .product-card-container {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  
+  @media (max-width: 1199px) and (min-width: 992px) {
+    .product-card-container {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  @media (max-width: 991px) and (min-width: 768px) {
+    .product-card-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .product-card-container {
+      grid-template-columns: 1fr;
+      width: calc(100% - 40px); /* Ajusta el margen izquierdo y derecho */
+    }
+  }

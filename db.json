@@ -1,0 +1,95 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "title": "Producto Ejemplo 1",
+      "subtitle": "subtitle producto",
+      "price": "2000",
+      "image": "https://via.placeholder.com/300"
+    },
+    {
+      "id": "2",
+      "title": "Producto Ejemplo 2",
+      "subtitle": "subtitle producto",
+      "price": "2000",
+      "image": "https://via.placeholder.com/300"
+    },
+    {
+      "id": "3",
+      "title": "Producto Ejemplo 3",
+      "subtitle": "subtitle producto",
+      "price": "2000",
+      "image": "https://via.placeholder.com/300"
+    },
+    {
+      "id": "4",
+      "title": "Producto Ejemplo 4",
+      "subtitle": "subtitle producto",
+      "price": "2000",
+      "image": "https://via.placeholder.com/300"
+    },
+    {
+      "id": "1",
+      "title": "Producto Ejemplo 1",
+      "subtitle": "subtitle producto",
+      "price": "2000",
+      "image": "https://via.placeholder.com/300"
+    },
+    {
+      "id": "2",
+      "title": "Producto Ejemplo 2",
+      "subtitle": "subtitle producto",
+      "price": "2000",
+      "image": "https://via.placeholder.com/300"
+    },
+    {
+      "id": "3",
+      "title": "Producto Ejemplo 3",
+      "subtitle": "subtitle producto",
+      "price": "2000",
+      "image": "https://via.placeholder.com/300"
+    },
+    {
+      "id": "4",
+      "title": "Producto Ejemplo 4",
+      "subtitle": "subtitle producto",
+      "price": "2000",
+      "image": "https://via.placeholder.com/300"
+    },
+    {
+      "id": "1",
+      "title": "Producto Ejemplo 1",
+      "subtitle": "subtitle producto",
+      "price": "2000",
+      "image": "https://via.placeholder.com/300"
+    },
+    {
+      "id": "2",
+      "title": "Producto Ejemplo 2",
+      "subtitle": "subtitle producto",
+      "price": "2000",
+      "image": "https://via.placeholder.com/300"
+    },
+    {
+      "id": "3",
+      "title": "Producto Ejemplo 3",
+      "subtitle": "subtitle producto",
+      "price": "2000",
+      "image": "https://via.placeholder.com/300"
+    },
+    {
+      "id": "4",
+      "title": "Producto Ejemplo 4",
+      "subtitle": "subtitle producto",
+      "price": "2000",
+      "image": "https://via.placeholder.com/300"
+    }
+  ],
+  "login": [
+    {
+      "id": "1",
+      "email": "yoserfenix@gmail.com",
+      "password": 1234567890
+    }
+  ]
+}

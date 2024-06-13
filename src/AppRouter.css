@@ -1,0 +1,5 @@
+/* AppRouter.css */
+
+.app-container {
+  padding-bottom: 60px; /* Ajusta este valor si el footer tiene diferente altura */
+}

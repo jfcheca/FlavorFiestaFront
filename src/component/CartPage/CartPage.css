@@ -1,0 +1,58 @@
+/* CartPage.css */
+.cart-page {
+  text-align: center;
+}
+
+.cart-item-list {
+  list-style: none;
+  padding: 0;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.cart-item-image {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.cart-item-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-item-name,
+.cart-item-quantity,
+.cart-item-price {
+  margin: 0;
+}
+
+.clear-cart-button {
+  margin-top: 10px;
+}
+
+/* Agrega este CSS a tu archivo CartPage.css */
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.product-table th,
+.product-table td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+.product-table th {
+  background-color: #f2f2f2;
+}
+
+.product-table img {
+  width: 50px;
+  height: 50px;
+}
