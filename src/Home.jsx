@@ -4,12 +4,13 @@ import CategoriesSection from '../src/component/Categories/CategoriesSection';
 import ProductCardContainer from './component/ProductCardContainer/ProductCardContainer';
 import bannerHome from '../src/component/Categories/bannerhome.jpg';
 import './Home.css';
+import API_BASE_URL from "./config";
 
 const Home = () => {
   { const [products, setProducts] = useState([]);
 
     useEffect(() => {
-      fetch('http://localhost:8080/productos/')
+      fetch(`${API_BASE_URL}/productos/`)
         .then(response => response.json())
         .then(data => setProducts(data.data))
         .catch(error => console.error('Error fetching products:', error));

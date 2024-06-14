@@ -1,155 +1,165 @@
 #whole-signupForm {
     display: flex;
     width: 100vw;
-    /* Ocupa el 100% del ancho de la ventana */
     height: 100vh;
-    /* Ocupa el 100% de la altura de la ventana */
-}
-
-#signUpDiv {
+  }
+  
+  #signUpDiv {
     width: 50vw;
-}
-
-#signuoForm {
+  }
+  
+  #signuoForm {
     margin-top: 5vw;
-    /* Ajusta este valor para mover el formulario hacia arriba */
-}
-
-.sigForm {
+  }
+  
+  .sigForm {
     margin: 2vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.form-group {
+  }
+  
+  .form-group {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
     align-items: flex-start;
-}
-
-label {
+  }
+  
+  label {
+    display: block;
     margin-bottom: 5px;
-}
-
-h2 {
+    font-weight: bold;
+  }
+  
+  h2 {
     color: #CC2D4A;
-}
-
-.inputText {
+  }
+  
+  .inputText {
     width: 400px;
     height: 30px;
-    margin-bottom: 5px;
-    border-radius: 10px;
-    color: #D9D9D9;
+    color: #000;
     border: 1px solid #ccc;
-}
-
-#checkBoxLabel {
+    padding: 10px;
+  }
+  
+  #checkBoxLabel {
     font-size: 12px;
     color: black;
     height: 2vw;
-}
-
-#checkBox {
+  }
+  
+  #checkBox {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-content: flex-start;
-}
-
-#termsPolicy {
+  }
+  
+  #termsPolicy {
     color: black;
     text-decoration: underline;
-}
-
-#botonRegistrarse {
+  }
+  
+  #botonRegistrarse {
     color: white;
     background-color: #8FA206;
     height: 35.02px;
     width: 404px;
     border: none;
     border-radius: 10px;
-}
-.link-button{
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  #botonRegistrarse:hover {
+    background-color: #819105;
+  }
+  
+  .link-button {
     color: white;
     text-decoration: none;
-   
-}
-
-#or {
+  }
+  
+  #or {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-}
-
-.horizontal-line {
+  }
+  
+  .horizontal-line {
     flex-grow: 10;
     border: none;
     border-top: 2px solid #D9D9D9;
     margin: 0 10px;
     width: 100px;
-}
-
-.centered-span {
+  }
+  
+  .centered-span {
     margin-top: 4px;
     display: flex;
     justify-content: center;
     width: 100%;
-}
-
-#iSesion {
+  }
+  
+  #iSesion {
     color: #CC2D4A;
-}
-
-#imagenRegistro {
+    text-decoration: none;
+  }
+  
+  #iSesion:hover {
+    text-decoration: underline;
+  }
+  
+  #imagenRegistro {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-
-/* Media query para dispositivos con un ancho máximo de 820px */
-@media screen and (max-width: 820px) {
+  }
+  
+  /* Media query para dispositivos con un ancho máximo de 820px */
+  @media screen and (max-width: 820px) {
     #whole-signupForm {
-        flex-direction: column;
-        align-items: center;
+      flex-direction: column;
+      align-items: center;
     }
-
+  
     #signUpDiv {
-        width: 90vw;
+      width: 90vw;
     }
-
+  
     #signuoForm {
-        margin-top: 5vw;
+      margin-top: 5vw;
     }
-
+  
     .sigForm {
-        margin: 5vw;
+      margin: 5vw;
     }
-
+  
     .inputText {
-        width: 80vw;
+      width: 80vw;
     }
-
+  
     #botonRegistrarse {
-        width: 80vw;
+      width: 80vw;
     }
-
+  
     #checkBoxLabel {
-        font-size: 10px;
-        height: auto;
+      font-size: 10px;
+      height: auto;
     }
-
+  
     .horizontal-line {
-        width: 80%;
+      width: 80%;
     }
-
+  
     #imagenRegistro {
-        width: 100vw;
-        height: auto;
-        position: relative;
-        left: -22px;
+      width: 100vw;
+      height: auto;
+      position: relative;
+      left: -22px;
     }
-}
+  }
+  

@@ -6,6 +6,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import loginImage from '../../assets/iniciarsesion.jpg';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthContext/AuthContext';
+import API_BASE_URL from "../../config";
 
 
 const LoginPage = () => {
@@ -32,7 +33,7 @@ const LoginPage = () => {
     }
 
     try {
-      const response = await axios.get(`http://localhost:8080/usuarios/email&passdatos?email=${email}&password=${password}`);
+      const response = await axios.get(`${API_BASE_URL}/usuarios/email&passdatos?email=${email}&password=${password}`);
       console.log(response.data.success)
       // Manejar la respuesta de la API
       if (response.data.success) {

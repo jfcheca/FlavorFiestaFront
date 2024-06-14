@@ -131,68 +131,131 @@ const HeaderLayout = () => {
           </IconButton>
         )}
 
-        <Menu
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
-        >
-          {usuario ? (
-            <MenuItem
-              onClick={handleLogout}
-              sx={{
-                fontFamily: "Poppins",
-                fontWeight: 600,
-                color: "#CC2D4A",
-                "&:hover": {
-                  color: "#8FA206"
-                },
-                "&:active": {
-                  color: "white",
-                  backgroundColor: "#8FA206"
-                },
-              }}
-            >
-              Cerrar sesión
-            </MenuItem>
-          ) : (
-            <>
-              <MenuItem
-                onClick={handleLogin}
-                sx={{
-                  fontFamily: "Poppins",
-                  fontWeight: 600,
-                  color: "#CC2D4A",
-                  "&:hover": {
-                    color: "#8FA206"
-                  },
-                  "&:active": {
-                    color: "white",
-                    backgroundColor: "#8FA206"
-                  },
-                }}
-              >
-                Iniciar sesión
-              </MenuItem>
-              <MenuItem
-                onClick={handleSignUp}
-                sx={{
-                  fontFamily: "Poppins",
-                  fontWeight: 600,
-                  color: "#CC2D4A",
-                  "&:hover": {
-                    color: "#8FA206"
-                  },
-                  "&:active": {
-                    color: "white",
-                    backgroundColor: "#8FA206"
-                  },
-                }}
-              >
-                Crear cuenta
-              </MenuItem>
-            </>
-          )}
-        </Menu>
+<Menu
+  anchorEl={anchorEl}
+  open={Boolean(anchorEl)}
+  onClose={handleClose}
+>
+  {usuario ? (
+    <>
+      <MenuItem
+        onClick={() => {
+          // Agrega la lógica para navegar a la página de editar perfil
+          handleClose();
+        }}
+        sx={{
+          fontFamily: "Poppins",
+          fontWeight: 600,
+          color: "#CC2D4A",
+          "&:hover": {
+            color: "#8FA206"
+          },
+          "&:active": {
+            color: "white",
+            backgroundColor: "#8FA206"
+          },
+        }}
+      >
+        Editar perfil
+      </MenuItem>
+      <MenuItem
+        onClick={() => {
+          // Agrega la lógica para navegar a la página de favoritos
+          handleClose();
+        }}
+        sx={{
+          fontFamily: "Poppins",
+          fontWeight: 600,
+          color: "#CC2D4A",
+          "&:hover": {
+            color: "#8FA206"
+          },
+          "&:active": {
+            color: "white",
+            backgroundColor: "#8FA206"
+          },
+        }}
+      >
+        Favoritos
+      </MenuItem>
+      <MenuItem
+        onClick={() => {
+          // Agrega la lógica para navegar a la página de mis pedidos
+          handleClose();
+        }}
+        sx={{
+          fontFamily: "Poppins",
+          fontWeight: 600,
+          color: "#CC2D4A",
+          "&:hover": {
+            color: "#8FA206"
+          },
+          "&:active": {
+            color: "white",
+            backgroundColor: "#8FA206"
+          },
+        }}
+      >
+        Mis pedidos
+      </MenuItem>
+      <MenuItem
+        onClick={handleLogout}
+        sx={{
+          fontFamily: "Poppins",
+          fontWeight: 600,
+          color: "#CC2D4A",
+          "&:hover": {
+            color: "#8FA206"
+          },
+          "&:active": {
+            color: "white",
+            backgroundColor: "#8FA206"
+          },
+        }}
+      >
+        Cerrar sesión
+      </MenuItem>
+    </>
+  ) : (
+    <>
+      <MenuItem
+        onClick={handleLogin}
+        sx={{
+          fontFamily: "Poppins",
+          fontWeight: 600,
+          color: "#CC2D4A",
+          "&:hover": {
+            color: "#8FA206"
+          },
+          "&:active": {
+            color: "white",
+            backgroundColor: "#8FA206"
+          },
+        }}
+      >
+        Iniciar sesión
+      </MenuItem>
+      <MenuItem
+        onClick={handleSignUp}
+        sx={{
+          fontFamily: "Poppins",
+          fontWeight: 600,
+          color: "#CC2D4A",
+          "&:hover": {
+            color: "#8FA206"
+          },
+          "&:active": {
+            color: "white",
+            backgroundColor: "#8FA206"
+          },
+        }}
+      >
+        Crear cuenta
+      </MenuItem>
+    </>
+  )}
+</Menu>
+
       </Box>
       <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
         <List>

@@ -11,6 +11,8 @@ import { AuthProvider } from './component/AuthContext/AuthContext';
 import CartProvider from './component/CartContext/CartContext';
 import { OrderProvider } from './component/OrderContext/OrderContext';
 import CartPage from './component/CartPage/CartPage';
+import Store from './component/store/store';
+import Categoria from './component/categoria/categoria';
 import PrivateRoute from './PrivateRoute';
 import Search from "./component/Search/Search";
 
@@ -24,8 +26,8 @@ const AppRoutes = () => {
         <Route element={<HeaderContainer />}>
           <Route path="/" element={<Home />} />
           <Route path="/product/:productId" element={<ProductDetail />} />
-          <Route path="/store" element={null} />
-          <Route path="/categories" element={null} />
+          <Route path="/store" element={<Store />} />
+          <Route path="/categoria/:categoriaId" element={<Categoria />} />
           <Route path="/faqs" element={null} />
           <Route path="/contact" element={null} />
           <Route path="/login" element={<Login />} />

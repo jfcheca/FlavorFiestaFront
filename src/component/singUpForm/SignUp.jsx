@@ -1,17 +1,46 @@
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Img from "../../assets/chris-lee-70l1tDAI6rM-unsplash 1.jpg";
 import "./SignUp.css";
 import { Link } from "react-router-dom";
+import API_BASE_URL from "../../config";
 
 const SignUp = () => {
   const {
     register,
     formState: { errors },
-    watch,
     handleSubmit,
   } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
+  const [apiResponse, setApiResponse] = useState(null);
+
+  const onSubmit = async (data) => {
+    const payload = {
+      nombre: data.nombre,
+      email: data.email,
+      telefono: data.celular,
+      password: data.password,
+      id_rol: 1 // Asignamos manualmente el ID del rol
+    };
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/usuarios/crear`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setApiResponse({ success: true, data: result });
+      } else {
+        setApiResponse({ success: false, message: result.message || "Error al crear usuario" });
+      }
+    } catch (error) {
+      setApiResponse({ success: false, message: "Error de red" });
+    }
   };
 
   return (
@@ -40,29 +69,6 @@ const SignUp = () => {
             )}
             {errors.nombre?.type === "maxLength" && (
               <p>El campo nombre debe tener menos de 30 caracteres</p>
-            )}
-          </div>
-          <div className="form-group">
-            <label htmlFor="apellido">Apellido</label>
-            <input
-              className="inputText"
-              type="text"
-              {...register("apellido", {
-                required: true,
-                minLength: 5,
-                maxLength: 30,
-              })}
-              id="apellido"
-              placeholder="Enter your lastname"
-            />
-            {errors.apellido?.type === "required" && (
-              <p>El campo apellido es requerido</p>
-            )}
-            {errors.apellido?.type === "minLength" && (
-              <p>El campo apellido debe tener al menos 5 caracteres</p>
-            )}
-            {errors.apellido?.type === "maxLength" && (
-              <p>El campo apellido debe tener menos de 30 caracteres</p>
             )}
           </div>
           <div className="form-group">
@@ -112,7 +118,7 @@ const SignUp = () => {
             <input
               className="inputText"
               type="password"
-              {...register("contraseña", {
+              {...register("password", {
                 required: true,
                 minLength: 6,
                 maxLength: 20,
@@ -120,13 +126,13 @@ const SignUp = () => {
               id="contrasena"
               placeholder="Enter your password"
             />
-            {errors.contraseña?.type === "required" && (
+            {errors.password?.type === "required" && (
               <p>El campo contraseña es requerido</p>
             )}
-            {errors.contraseña?.type === "minLength" && (
+            {errors.password?.type === "minLength" && (
               <p>La contraseña debe tener al menos 6 caracteres</p>
             )}
-            {errors.contraseña?.type === "maxLength" && (
+            {errors.password?.type === "maxLength" && (
               <p>La contraseña debe tener menos de 20 caracteres</p>
             )}
           </div>
@@ -143,19 +149,27 @@ const SignUp = () => {
               <p>Debes aceptar los términos y políticas</p>
             )}
           </div>
-          <button id="botonRegistrarse">
-            <Link to="/" className="link-button">
-              ¡Regístrate!
-            </Link>
+          <button id="botonRegistrarse" type="submit">
+            ¡Regístrate!
           </button>
         </form>
+        {apiResponse && (
+          <div className={apiResponse.success ? "success-message" : "error-message"}>
+            {apiResponse.success ? (
+              <div>
+                <p>Usuario creado con éxito:</p>
+              </div>
+            ) : (
+              <p>{apiResponse.message}</p>
+            )}
+          </div>
+        )}
         <div id="signUpDiv" className="form-group">
           <div id="or">
-            <hr className="horizontal-line"></hr>
+            <hr className="horizontal-line" />
             <h6>or</h6>
-            <hr className="horizontal-line"></hr>
+            <hr className="horizontal-line" />
           </div>
-
           <span className="centered-span">
             ¿tienes cuenta?{" "}
             <Link id="iSesion" to="/login">
