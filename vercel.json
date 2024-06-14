@@ -1,5 +1,10 @@
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/$1" }
+  "rewrites": [],
+  "routes": [
+    { "handle": "filesystem" },
+    {
+      "src": "/.well-known/acme-challenge/(.*)",
+      "dest": "/.well-known/acme-challenge/$1"
+    }
   ]
 }
