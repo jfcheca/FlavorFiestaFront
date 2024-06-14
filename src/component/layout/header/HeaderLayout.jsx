@@ -54,6 +54,14 @@ const HeaderLayout = () => {
 
   };
 
+  const handleMisPedidos = () => {
+    navigate("/MisPedidos"); // 
+  };
+
+  const handleEditarPerfil = () => {
+    navigate("/EditarPerfil"); // 
+  };
+
   const handleLogin = () => {
     handleClose();
     navigate("/login");
@@ -97,7 +105,7 @@ const HeaderLayout = () => {
 
       <Box component="nav" className={`navLink ${isMobile ? 'hidden' : ''}`}>
         <span onClick={() => navigate("/store")}>Tienda</span>
-        <span onClick={() => navigate("/categories")}>Categorías</span>
+        <span onClick={() => navigate("/aboutus")}>Conócenos</span>
         <span onClick={() => navigate("/faqs")}>FAQs</span>
         <span onClick={() => navigate("/contact")}>Contacto</span>
       </Box>
@@ -141,7 +149,7 @@ const HeaderLayout = () => {
       <MenuItem
         onClick={() => {
           // Agrega la lógica para navegar a la página de editar perfil
-          handleClose();
+          handleEditarPerfil();
         }}
         sx={{
           fontFamily: "Poppins",

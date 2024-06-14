@@ -1,0 +1,82 @@
+.contact-form-container {
+    padding: 20px;
+}
+
+.contact-form-container h2 {
+    color: #CC2D4A;
+    font-size: 20px;
+    text-align: center;
+}
+
+.contact-form-container p {
+    color: #7f8c8d;
+    text-align: center;
+    font-size: 16px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.contact-form input,
+.contact-form textarea,
+.contact-form select,
+.contact-form button {
+    margin-top: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.contact-form input,
+.contact-form textarea,
+.contact-form select {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.contact-form button {
+    background-color: #8FA206;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.contact-form button:hover {
+    background-color: #8FA206;
+}
+
+.message {
+    margin-top: 10px;
+    color: #CC2D4A;
+}
+
+.contact-form input::placeholder {
+    color: #D9D9D9;
+    font-family: 'Poppins', sans-serif;
+}
+
+.contact-form textarea::placeholder {
+    color: #D9D9D9;
+    font-family: 'Poppins', sans-serif;
+}
+
+.contact-form select::placeholder {
+    
+    font-family: 'Poppins', sans-serif;
+}
+
+.contact-form option {
+    
+    font-family: 'Poppins', sans-serif;
+}
+
+

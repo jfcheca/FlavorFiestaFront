@@ -1,0 +1,22 @@
+.faqs-container {
+    margin-top: 40px;
+  }
+
+
+  .MuiAccordionSummary-content,
+.MuiAccordionDetails-root {
+  padding: 16px;
+}
+
+.faqs-container {
+    background-color: #fff;
+   
+  }
+
+  .faq-image {
+
+    object-fit: cover;
+  }
+
+
+  
