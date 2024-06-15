@@ -6,6 +6,7 @@ import Carousel from '../Carousel/Carousel';
 import { CartContext } from '../CartContext/CartContext';
 import { AuthContext } from '../AuthContext/AuthContext';
 import { OrderContext } from '../OrderContext/OrderContext';
+import API_BASE_URL from "../../config";
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button } from '@mui/material';
 
 const ProductDetail = () => {
@@ -21,7 +22,7 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/productos/${productId}`);
+        const response = await axios.get(`${API_BASE_URL}/productos/${productId}`);
         setProduct(response.data.data);
       } catch (error) {
         console.error('Error fetching the product data', error);
@@ -33,7 +34,7 @@ const ProductDetail = () => {
 
   const createOrder = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/ordenes/crear', {
+      const response = await axios.post(`${API_BASE_URL}/ordenes/crear`, {
         id_usuario: usuario.id,
         id_estado: 1, // Assuming 1 is the default state for a new order
         fechaOrden: new Date().toISOString(),
@@ -49,7 +50,7 @@ const ProductDetail = () => {
 
   const createOrderProduct = async (orderId) => {
     try {
-      const response = await axios.post('http://localhost:8080/ordenProductos/crear', {
+      const response = await axios.post(`${API_BASE_URL}/ordenProductos/crear`, {
         id_orden: orderId,
         id_producto: product.id,
         total: product.precio * quantity,

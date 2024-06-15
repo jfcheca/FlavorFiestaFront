@@ -12,7 +12,11 @@ const Home = () => {
     useEffect(() => {
       fetch(`${API_BASE_URL}/productos/`)
         .then(response => response.json())
-        .then(data => setProducts(data.data))
+        .then(data => {
+          // Asumiendo que `data.data` es el array de productos
+          const limitedProducts = data.data.slice(0, 8); // Obtener solo los primeros 8 productos
+          setProducts(limitedProducts);
+        })
         .catch(error => console.error('Error fetching products:', error));
     }, []);
 

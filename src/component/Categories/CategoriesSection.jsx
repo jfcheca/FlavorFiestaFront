@@ -4,10 +4,10 @@ import './CategoriesSection.css'; // Asegúrate de crear este archivo CSS en el 
 
 const CategoriesSection = () => {
   const categories = [
-    { name: 'Con Alcohol', link: '/con-alcohol', imageName: 'conalcohol.jpg' },
-    { name: 'Línea Saludable', link: '/linea-saludable', imageName: 'lineasaludable.jpg' },
-    { name: 'Sin Alcohol', link: '/sin-alcohol', imageName: 'sinalcohol.jpg' },
-    { name: 'Kids', link: '/kids', imageName: 'kids.jpg' },
+    { name: 'Con Alcohol', link: '/categoria/3', imageName: 'conalcohol.jpg' },
+    { name: 'Línea Saludable', link: '/categoria/2', imageName: 'lineasaludable.jpg' },
+    { name: 'Sin Alcohol', link: '/categoria/4', imageName: 'sinalcohol.jpg' },
+    { name: 'Kids', link: '/categoria/1', imageName: 'kids.jpg' },
   ];
 
   return (

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import API_BASE_URL from "../../config";
 import { Box, Typography, CircularProgress } from '@mui/material';
 
 const ConfirmEmail = () => {
@@ -10,7 +11,7 @@ const ConfirmEmail = () => {
   useEffect(() => {
     const confirmEmail = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/usuarios/email&passdatos?email=yoserfenix@gmail.com&password=1234567`);
+        const response = await axios.get(`${API_BASE_URL}/usuarios/email&passdatos?email=yoserfenix@gmail.com&password=1234567`);
         if (response.data.success) {
           setStatus('success');
         } else {

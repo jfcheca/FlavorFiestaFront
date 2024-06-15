@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import ProductCardContainer from '../ProductCardContainer/ProductCardContainer';
 import './categoria.css';
+import API_BASE_URL from "../../config";
 
 const Categoria = () => {
   const [products, setProducts] = useState([]);
@@ -12,7 +13,7 @@ const Categoria = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/categorias/${categoriaId}`);
+        const response = await axios.get(`${API_BASE_URL}/categorias/${categoriaId}`);
         console.log(response.data);
         // Ahora accede a los productos dentro de la propiedad 'data'
         setProducts(response.data.data.productos);

@@ -8,6 +8,8 @@ import About from "./component/Aboutus/About";
 import SignUp from "./component/singUpForm/SignUp";
 import Contact from "./component/ContactForm/Contact";
 import Faqs from "./component/Faqs/FaqsPage";
+import ResetPassword from "./component/ResetPassword/ResetPassword";
+import ResetPassword2 from "./component/ResetPassword2/ResetPassword2";
 import ProductDetail from "./component/ProductDetail/ProductDetail"
 import ConfirmEmail from "./component/ConfirmEmail/ConfirmEmail"
 import { AuthProvider } from './component/AuthContext/AuthContext';
@@ -39,6 +41,8 @@ const AppRoutes = () => {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/ResetPassword" element={<ResetPassword />} />
+          <Route path="/ResetPassword/:usuarioId/:token" element={<ResetPassword2 />} />
           <Route path="/EditarPerfil" element={<EditarPerfil />} />
           <Route path="/confirm-email/:token" element={<ConfirmEmail />} />
         </Route>
