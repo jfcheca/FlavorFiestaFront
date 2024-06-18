@@ -7,7 +7,7 @@ import kids from './categorykids.jpg';
 
 const images = {
   'Con Alcohol': conAlcohol,
-  'Línea Saludable': lineaSaludable,
+  'Saludable': lineaSaludable,
   'Sin Alcohol': sinAlcohol,
   'Kids': kids,
 };

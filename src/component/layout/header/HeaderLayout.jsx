@@ -33,7 +33,6 @@ const HeaderLayout = () => {
   const [show, setShow] = useState(false);
   const [showUserActions, setShowUserActions] = useState(false);
 
-
   const handleClick = () => {
     console.log("Mostrar / Ocultar elemento", !show);
     setShow(!show);
@@ -113,7 +112,7 @@ const HeaderLayout = () => {
       )}
       <Box className="user-actions">
         <img src={SearchIcon} alt="Buscar" className="actionIcon" onClick={handleClick} />
-        {show && <Search />}
+        {show && <Search onClose={handleClick} />}
         {!show && (
         <>
         <DarkModeToggle />

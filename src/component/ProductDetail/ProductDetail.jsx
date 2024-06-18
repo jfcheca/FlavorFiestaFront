@@ -18,7 +18,6 @@ const ProductDetail = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const { addItemToCart } = useContext(CartContext);
   const navigate = useNavigate();
-
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -40,8 +39,8 @@ const ProductDetail = () => {
         fechaOrden: new Date().toISOString(),
         total: 0
       });
-      orden({success: true});
-      return response;
+      response.data.success = true
+      return response.data;
     } catch (error) {
       console.error('Error creating order', error);
       return null;
@@ -70,16 +69,15 @@ const ProductDetail = () => {
       if (!orden.success) {
         const newOrder = await createOrder();
         console.log(newOrder)
-        if (newOrder) {
-          console.log(newOrder.id);
-          const newOrderProduct = await createOrderProduct(newOrder.id);
+        if (orden.success) {
+          console.log(orden.usuario.id);
+          const newOrderProduct = await createOrderProduct(orden.usuario.id);
           if (newOrderProduct) {
             console.log('Order and order products created successfully');
           }
           setTriggerFetch(prev => !prev);
         }
       } else {
-        console.log(orden)
         const newOrderProduct = await createOrderProduct(orden.usuario.id);
         if (newOrderProduct) {
           console.log('Order product added successfully to the existing order');

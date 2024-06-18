@@ -1,59 +1,56 @@
-import React, { useState, useEffect } from 'react';
+// Search.jsx
+import React, { useState, useContext } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import './Search.css';
+import SearchResults from '../SearchResults/SearchResults';
+import { ProductContext } from '../ProductContext/ProductContext';
 
-const Search = (props) => {
-    //Setering the hooks of useState --> Seterar los hooks de useState
-    const [ users, setUsers ] = useState([]);
-    const [ search, setSearch ] = useState('');
+const Search = ({ onClose }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const { products } = useContext(ProductContext);
 
-    //Function to fetch data from the API --> Función para traer los datos de la API
-    const URL = 'https://jsonplaceholder.typicode.com/users';
+  const handleSearch = (event) => {
+    const searchTerm = event.target.value.trim();
+    setSearchTerm(searchTerm);
 
-    const showData = async () => {
-        const response = await fetch(URL);
-        const data = await response.json();
-        setUsers(data);
-    }
+    // Filter results based on search term
+    const filteredResults = searchTerm === ''
+      ? []
+      : products.filter(product =>
+          product.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+        );
 
-    //Search function --> Función de búsqueda
-    const searcher = (e) => {
-        setSearch(e.target.value);
-        //console.log(e.target.value);
-    }
-
-    const clearSearch = () => {
-      setSearch('');
+    setSearchResults(filteredResults);
   };
 
-    //Filtering method --> Método de filtrado 2
-    const results = !search ? users : users.filter((dato) => dato.name.toLowerCase().includes(search.toLowerCase()));
-
-    useEffect(() => {
-        showData();
-    }, []);
+  const handleClose = () => {
+    setSearchTerm('');
+    setSearchResults([]);
+    onClose();
+  };
 
   return (
-    <div className='search-container'>
-    <input value={search} onChange={searcher} type='text' placeholder='Buscar...' className='input' />
-      <table className=''>
-        <thead>
-          <tr>
-            <th>TITULO</th>
-            <th>DETALLE-PRODUCTO</th>
-          </tr>
-        </thead>
-        <tbody>
-          {results.map((user) => (
-            <tr key={user.id}>
-              <td>{user.name}</td>
-              <td>{user.username}</td>
-            </tr>
-          ))}
-        </tbody>
-
-      </table>
+    <div className="SearchContainer">
+      <div className="SearchContent">
+        <div className="SearchRow">
+          <div className="SearchBackButton" onClick={handleClose}>
+            <FontAwesomeIcon icon={faArrowLeft} size="lg" />
+          </div>
+          <input
+            type="text"
+            placeholder="Buscar..."
+            value={searchTerm}
+            onChange={handleSearch}
+          />
+        </div>
+        <div className="SearchResultsWrapper">
+          <SearchResults results={searchResults} onClose={handleClose} />
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Search
+export default Search;

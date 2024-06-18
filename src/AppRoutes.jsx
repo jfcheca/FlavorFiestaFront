@@ -19,12 +19,13 @@ import CartPage from './component/CartPage/CartPage';
 import Store from './component/store/store';
 import Categoria from './component/categoria/categoria';
 import EditarPerfil from './component/EditarPerfil/EditarPerfil';
+import { ProductProvider } from './component/ProductContext/ProductContext';
 import PrivateRoute from './PrivateRoute';
-import Search from "./component/Search/Search";
 
 const AppRoutes = () => {
   return (
     <AuthProvider>
+      <ProductProvider>
       <OrderProvider>
       <CartProvider>
     <div className="app-container">
@@ -40,7 +41,6 @@ const AppRoutes = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/cart" element={<CartPage />} />
-          <Route path="/search" element={<Search />} />
           <Route path="/ResetPassword" element={<ResetPassword />} />
           <Route path="/ResetPassword/:usuarioId/:token" element={<ResetPassword2 />} />
           <Route path="/EditarPerfil" element={<EditarPerfil />} />
@@ -51,6 +51,7 @@ const AppRoutes = () => {
     </div>
     </CartProvider>
     </OrderProvider>
+    </ProductProvider>
     </AuthProvider>
   );
 };
