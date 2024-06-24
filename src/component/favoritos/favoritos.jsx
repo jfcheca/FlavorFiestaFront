@@ -44,7 +44,7 @@ const Favoritos = () => {
   }
 
   return (
-    <div className="favoritos">
+    <div className="favorito">
       <ProductCardContainer products={favoriteProducts} />
     </div>
   );

@@ -24,6 +24,7 @@
 .size{
     width: 250px;
     margin-bottom: 24px;
+    min-height: 355px;
    
     
 }
