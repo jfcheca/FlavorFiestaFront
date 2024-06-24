@@ -20,12 +20,14 @@
     "@mui/icons-material": "^5.15.18",
     "@mui/material": "^5.15.18",
     "axios": "^1.7.2",
+    "crypto-js": "^4.2.0",
     "react": "^18.3.1",
     "react-credit-cards": "^0.8.3",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.51.5",
     "react-payment-inputs": "^1.1.9",
-    "react-router-dom": "^6.23.1"
+    "react-router-dom": "^6.23.1",
+    "react-toastify": "^10.0.5"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

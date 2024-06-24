@@ -12,14 +12,17 @@ import ResetPassword from "./component/ResetPassword/ResetPassword";
 import ResetPassword2 from "./component/ResetPassword2/ResetPassword2";
 import ProductDetail from "./component/ProductDetail/ProductDetail"
 import ConfirmEmail from "./component/ConfirmEmail/ConfirmEmail"
+import Favoritos from "./component/favoritos/favoritos"
 import { AuthProvider } from './component/AuthContext/AuthContext';
 import CartProvider from './component/CartContext/CartContext';
 import { OrderProvider } from './component/OrderContext/OrderContext';
+import FavoritosProvider from './component/favoritosContext/favoritosContext';
 import CartPage from './component/CartPage/CartPage';
 import Store from './component/store/store';
 import Categoria from './component/categoria/categoria';
 import EditarPerfil from './component/EditarPerfil/EditarPerfil';
 import { ProductProvider } from './component/ProductContext/ProductContext';
+import { OrdenProductosProvider } from './component/OrderProductContext/OrderProductContext';
 import PrivateRoute from './PrivateRoute';
 
 const AppRoutes = () => {
@@ -27,7 +30,9 @@ const AppRoutes = () => {
     <AuthProvider>
       <ProductProvider>
       <OrderProvider>
+      <OrdenProductosProvider>
       <CartProvider>
+      <FavoritosProvider>
     <div className="app-container">
       <Routes>
         <Route element={<HeaderContainer />}>
@@ -44,12 +49,15 @@ const AppRoutes = () => {
           <Route path="/ResetPassword" element={<ResetPassword />} />
           <Route path="/ResetPassword/:usuarioId/:token" element={<ResetPassword2 />} />
           <Route path="/EditarPerfil" element={<EditarPerfil />} />
-          <Route path="/confirm-email/:token" element={<ConfirmEmail />} />
+          <Route path="/ActivateAccount/:usuarioId/:token" element={<ConfirmEmail />} />
+          <Route path="/Favoritos" element={<Favoritos />} />
         </Route>
       </Routes>
       <Footer />
     </div>
+    </FavoritosProvider>
     </CartProvider>
+    </OrdenProductosProvider>
     </OrderProvider>
     </ProductProvider>
     </AuthProvider>

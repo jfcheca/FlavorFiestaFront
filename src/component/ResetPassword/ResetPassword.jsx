@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import './ResetPassword.css'; // Archivo CSS para estilos específicos del componente
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import API_BASE_URL from "../../config";
 import passwordImage from '../../assets/logoo.png'; // Ruta a la imagen del logo (ajusta según tu estructura de archivos)
 
 const ResetPassword = () => {
@@ -20,7 +21,7 @@ const ResetPassword = () => {
 
   const handleResetPassword = async () => {
     try {
-      const response = await fetch('http://localhost:8080/auth/forgotPassword', {
+      const response = await fetch(`${API_BASE_URL}/auth/forgotPassword`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

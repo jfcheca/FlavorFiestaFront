@@ -7,7 +7,7 @@ import loginImage from '../../assets/iniciarsesion.jpg';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthContext/AuthContext';
 import API_BASE_URL from "../../config";
-
+import CryptoJS from 'crypto-js'; // Importar la librería crypto-js
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -17,10 +17,10 @@ const LoginPage = () => {
   const { usuario, login } = useContext(AuthContext);
   const navigate = useNavigate(); // Hook para redirección
 
-    // Redirigir si ya está autenticado
-    if (usuario) {
-      navigate('/');
-    }
+  // Redirigir si ya está autenticado
+  if (usuario) {
+    navigate('/');
+  }
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -32,14 +32,23 @@ const LoginPage = () => {
       return;
     }
 
+    // Encriptar la contraseña
+    const encryptedPassword = CryptoJS.SHA256(password).toString();
+    console.log(encryptedPassword)
+
     try {
-      const response = await axios.get(`${API_BASE_URL}/usuarios/email&passdatos?email=${email}&password=${password}`);
+      const response = await axios.get(`${API_BASE_URL}/usuarios/email&passdatos?email=${email}&password=${encryptedPassword}`);
       console.log(response.data.success)
       // Manejar la respuesta de la API
       if (response.data.success) {
-        login(response.data.usuario);
+        if(response.data.usuario.estado_cuenta != "activo"){
+          setError('El usuario no ha confirmado su correo.');
+        }
+        else{
+          login(response.data.usuario);
         // Redirigir al usuario a la página principal o a otra página después del inicio de sesión exitoso
         navigate('/');
+        }
       } else {
         setError('El usuario no existe o las credenciales son incorrectas.');
       }
@@ -81,6 +90,9 @@ const LoginPage = () => {
               >
                 <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
               </button>
+            </div>
+            <div className="forgot-password-container">
+              {error && <a href="/ResetPassword" className="forgot-password">Olvidé mi contraseña</a>}
             </div>
           </div>
           {error && <p className="error-message">{error}</p>}

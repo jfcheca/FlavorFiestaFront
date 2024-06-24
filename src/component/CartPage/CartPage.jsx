@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import { CartContext } from '../CartContext/CartContext';
 import { Box, Card, CardContent, Button, IconButton } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
@@ -10,7 +9,6 @@ import ProgressBar from '../ProgressBar/ProgressBar';
 import './CartPage.css';
 
 const CartPage = () => {
-  const { cartItems, updateItemQuantity, removeItemFromCart } = useContext(CartContext);
   const [step, setStep] = useState(1);
   const [personalData, setPersonalData] = useState({
     nombre: '',
@@ -29,13 +27,7 @@ const CartPage = () => {
   const handlePrevStep = () => setStep(step - 1);
   const handlePersonalDataChange = (e) => setPersonalData({ ...personalData, [e.target.name]: e.target.value });
   const handlePaymentDataChange = (e) => setPaymentData({ ...paymentData, [e.target.name]: e.target.value });
-  const handleQuantityChange = (itemId, cantidad) => updateItemQuantity(itemId, parseInt(cantidad, 10));
 
-  const calculateTotal = () => {
-    let total = 0;
-    cartItems.forEach((item) => total += item.precio * item.cantidad);
-    return total.toFixed(2);
-  };
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center" minHeight="100vh" bgcolor="#f5f5f5">
@@ -66,10 +58,6 @@ const CartPage = () => {
         <CardContent>
           {step === 1 && (
             <CartSummary
-              cartItems={cartItems}
-              handleQuantityChange={handleQuantityChange}
-              removeItemFromCart={removeItemFromCart}
-              calculateTotal={calculateTotal}
               handleNextStep={handleNextStep}
             />
           )}

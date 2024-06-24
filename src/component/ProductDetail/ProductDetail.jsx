@@ -6,17 +6,22 @@ import Carousel from '../Carousel/Carousel';
 import { CartContext } from '../CartContext/CartContext';
 import { AuthContext } from '../AuthContext/AuthContext';
 import { OrderContext } from '../OrderContext/OrderContext';
+import { useOrdenProductos } from '../OrderProductContext/OrderProductContext';
 import API_BASE_URL from "../../config";
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button } from '@mui/material';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductDetail = () => {
   const { usuario } = useContext(AuthContext);
+  const { refreshData  } = useOrdenProductos();
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
   const { orden, setTriggerFetch } = useContext(OrderContext);
   const [quantity, setQuantity] = useState(1);
   const [openDialog, setOpenDialog] = useState(false);
   const { addItemToCart } = useContext(CartContext);
+  
   const navigate = useNavigate();
   useEffect(() => {
     const fetchProduct = async () => {
@@ -55,6 +60,10 @@ const ProductDetail = () => {
         total: product.precio * quantity,
         cantidad: quantity
       });
+      toast.success('Producto agregado a la orden correctamente!', {
+        position: "top-right"
+      });
+      refreshData();
       return response.data.data;
     } catch (error) {
       console.error('Error creating order product', error);
@@ -65,13 +74,13 @@ const ProductDetail = () => {
   const handleAddToCart = async () => {
     if (!usuario) {
       setOpenDialog(true);
-    } else {
+    } else { 
       if (!orden.success) {
         const newOrder = await createOrder();
         console.log(newOrder)
-        if (orden.success) {
-          console.log(orden.usuario.id);
-          const newOrderProduct = await createOrderProduct(orden.usuario.id);
+        if (newOrder) {
+          console.log(newOrder.id);
+          const newOrderProduct = await createOrderProduct(newOrder.id);
           if (newOrderProduct) {
             console.log('Order and order products created successfully');
           }
@@ -145,6 +154,8 @@ const ProductDetail = () => {
           </Button>
         </DialogActions>
       </Dialog>
+      {/* Contenedor para las notificaciones */}
+      <ToastContainer />
     </div>
   );
 };

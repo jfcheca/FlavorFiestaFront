@@ -1,42 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { Box, Typography, Button, Alert } from '@mui/material';
 import API_BASE_URL from "../../config";
-import { Box, Typography, CircularProgress } from '@mui/material';
 
 const ConfirmEmail = () => {
-  const { token } = useParams();
-  const [status, setStatus] = useState('pending'); // pending, success, error
+  const { usuarioId, token } = useParams();
+  const [error, setError] = useState(false);
 
-  useEffect(() => {
-    const confirmEmail = async () => {
-      try {
-        const response = await axios.get(`${API_BASE_URL}/usuarios/email&passdatos?email=yoserfenix@gmail.com&password=1234567`);
-        if (response.data.success) {
-          setStatus('success');
-        } else {
-          setStatus('error');
-        }
-      } catch (error) {
-        setStatus('error');
-      }
-    };
+  const confirmEmail = async () => {
+    try {
+      const response = await axios.put(
+        `${API_BASE_URL}/usuarios/ActivarCuentaEstado/${usuarioId}`,
+        { estado_cuenta: 'activo' },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
 
-    confirmEmail();
-  }, [token]);
+      if (response) {
+        alert('Usuario activado');
+      } 
+    } catch (error) {
+      setError(true);
+    }
+  };
 
   return (
     <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" height="100vh">
-      {status === 'pending' && <CircularProgress />}
-      {status === 'success' && (
-        <Typography variant="h4" component="h1" gutterBottom>
-          ¡Correo electrónico confirmado con éxito!
-        </Typography>
-      )}
-      {status === 'error' && (
-        <Typography variant="h4" component="h1" gutterBottom>
+      <Typography variant="h4" component="h1" gutterBottom>
+        Confirmar Activación de Usuario
+      </Typography>
+      <Button variant="contained" color="primary" onClick={confirmEmail}>
+        Activar Usuario
+      </Button>
+      {error && (
+        <Alert severity="error" style={{ marginTop: '20px' }}>
           Error al confirmar el correo electrónico. Por favor, inténtalo de nuevo.
-        </Typography>
+        </Alert>
       )}
     </Box>
   );

@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from '../../AuthContext/AuthContext';
-import { CartContext } from '../../CartContext/CartContext';
+import { OrderContext } from '../../OrderContext/OrderContext';
+import { useOrdenProductos } from '../../OrderProductContext/OrderProductContext';
 import {
   Box,
   Drawer,
@@ -25,7 +26,7 @@ import Search from '../../Search/Search';
 
 const HeaderLayout = () => {
   const { usuario, logout } = useContext(AuthContext);
-  const { cartItems } = useContext(CartContext);
+  const { orden, setTriggerFetch } = useContext(OrderContext);
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -33,7 +34,11 @@ const HeaderLayout = () => {
   const [show, setShow] = useState(false);
   const [showUserActions, setShowUserActions] = useState(false);
 
+  const { ordenProductos } = useOrdenProductos();
+  console.log(ordenProductos)
+
   const handleClick = () => {
+    
     console.log("Mostrar / Ocultar elemento", !show);
     setShow(!show);
     setShowUserActions(false); // Oculta la sección de iconos de usuario cuando se hace clic en la lupa
@@ -72,14 +77,30 @@ const HeaderLayout = () => {
   };
 
   const handleLogout = () => {
-    logout();
-    navigate('/');
+    logout(); // Tu función de logout
+  
+    // Limpiar la caché de la aplicación
+    if ('caches' in window) {
+      caches.keys().then((names) => {
+        names.forEach(name => {
+          caches.delete(name);
+        });
+      });
+    }
+  
+    // Limpiar localStorage y sessionStorage
+    localStorage.clear();
+    sessionStorage.clear();
+  
+    // Forzar la recarga completa de la página
+    window.location.reload(true); // Recargar desde el servidor
   };
+  
+  
 
   const toggleDrawer = (open) => () => {
     setDrawerOpen(open);
   };
-
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -90,8 +111,7 @@ const HeaderLayout = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
-
+  }, []); 
   return (
     <Box component="header" className={`Navbar ${show ? 'search-active' : ''}`}>  
       {!show && (
@@ -117,7 +137,7 @@ const HeaderLayout = () => {
         <>
         <DarkModeToggle />
         <IconButton color="inherit" onClick={() => navigate('/cart')}>
-          <Badge badgeContent={cartItems.reduce((acc, item) => acc + item.quantity, 0)} color="secondary">
+            <Badge badgeContent={usuario ? (ordenProductos && ordenProductos.data ? ordenProductos.data.length : 0) : 0} color="secondary">
             <FontAwesomeIcon icon={faShoppingCart} style={{ color: '#CC2D4A' }} />
           </Badge>
         </IconButton>

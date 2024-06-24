@@ -3,7 +3,9 @@ import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import './ResetPassword2.css';
-import passwordImage from '../../assets/logoo.png'; // Asegúrate de tener una imagen en esta ruta o ajustar la ruta.
+import passwordImage from '../../assets/logoo.png';
+import API_BASE_URL from "../../config";
+import CryptoJS from 'crypto-js'; // Importar la librería crypto-js // Asegúrate de tener una imagen en esta ruta o ajustar la ruta.
 
 const ResetPassword2 = () => {
   const { usuarioId, token } = useParams();
@@ -38,13 +40,14 @@ const ResetPassword2 = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:8080/usuarios/forgotPassword/${usuarioId}`, {
+      const encryptedPassword = CryptoJS.SHA256(password).toString();
+      const response = await fetch(`${API_BASE_URL}/usuarios/forgotPassword/${usuarioId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({ password: encryptedPassword }),
       });
 
       if (response.ok) {

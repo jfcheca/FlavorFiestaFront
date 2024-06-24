@@ -1,24 +1,41 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import Img from "../../assets/chris-lee-70l1tDAI6rM-unsplash 1.jpg";
 import "./SignUp.css";
 import { Link } from "react-router-dom";
 import API_BASE_URL from "../../config";
+import CryptoJS from 'crypto-js'; // Importar la librería crypto-js
 
 const SignUp = () => {
   const {
     register,
     formState: { errors },
     handleSubmit,
+    watch,
   } = useForm();
   const [apiResponse, setApiResponse] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleShowConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
 
   const onSubmit = async (data) => {
+    // Encriptar la contraseña
+    const encryptedPassword = CryptoJS.SHA256(data.password).toString();
+    console.log(encryptedPassword)
     const payload = {
       nombre: data.nombre,
       email: data.email,
       telefono: data.celular,
-      password: data.password,
+      password: encryptedPassword,
       id_rol: 1 // Asignamos manualmente el ID del rol
     };
 
@@ -34,6 +51,15 @@ const SignUp = () => {
       const result = await response.json();
 
       if (response.ok) {
+        // Si el usuario se crea con éxito, hacer la segunda solicitud para activar la cuenta
+        await fetch(`${API_BASE_URL}/auth/tokenActivarCuenta`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email: data.email }),
+        });
+
         setApiResponse({ success: true, data: result });
       } else {
         setApiResponse({ success: false, message: result.message || "Error al crear usuario" });
@@ -62,13 +88,13 @@ const SignUp = () => {
               placeholder="Enter your name"
             />
             {errors.nombre?.type === "required" && (
-              <p>El campo nombre es requerido</p>
+              <p className="error-message">El campo nombre es requerido</p>
             )}
             {errors.nombre?.type === "minLength" && (
-              <p>El campo nombre debe tener al menos 5 caracteres</p>
+              <p className="error-message">El campo nombre debe tener al menos 5 caracteres</p>
             )}
             {errors.nombre?.type === "maxLength" && (
-              <p>El campo nombre debe tener menos de 30 caracteres</p>
+              <p className="error-message">El campo nombre debe tener menos de 30 caracteres</p>
             )}
           </div>
           <div className="form-group">
@@ -85,13 +111,13 @@ const SignUp = () => {
               placeholder="Enter your celphone"
             />
             {errors.celular?.type === "required" && (
-              <p>El campo celular es requerido</p>
+              <p className="error-message">El campo celular es requerido</p>
             )}
             {errors.celular?.type === "minLength" && (
-              <p>El campo celular debe tener al menos 10 caracteres</p>
+              <p className="error-message">El campo celular debe tener al menos 10 caracteres</p>
             )}
             {errors.celular?.type === "maxLength" && (
-              <p>El campo celular debe tener menos de 15 caracteres</p>
+              <p className="error-message">El campo celular debe tener menos de 15 caracteres</p>
             )}
           </div>
           <div className="form-group">
@@ -107,36 +133,66 @@ const SignUp = () => {
               placeholder="Enter your email"
             />
             {errors.email?.type === "required" && (
-              <p>El campo correo es requerido</p>
+              <p className="error-message">El campo correo es requerido</p>
             )}
             {errors.email?.type === "pattern" && (
-              <p>El formato del email es incorrecto</p>
+              <p className="error-message">El formato del email es incorrecto</p>
             )}
           </div>
           <div className="form-group">
             <label htmlFor="contrasena">Contraseña</label>
-            <input
-              className="inputText"
-              type="password"
-              {...register("password", {
-                required: true,
-                minLength: 6,
-                maxLength: 20,
-              })}
-              id="contrasena"
-              placeholder="Enter your password"
-            />
+            <div className="password-wrapper">
+              <input
+                className="inputText"
+                type={showPassword ? "text" : "password"}
+                {...register("password", {
+                  required: true,
+                  minLength: 6,
+                  maxLength: 20,
+                })}
+                id="contrasena"
+                placeholder="Enter your password"
+              />
+              <FontAwesomeIcon
+                icon={showPassword ? faEyeSlash : faEye}
+                className="password-icon"
+                onClick={toggleShowPassword}
+              />
+            </div>
             {errors.password?.type === "required" && (
-              <p>El campo contraseña es requerido</p>
+              <p className="error-message">El campo contraseña es requerido</p>
             )}
             {errors.password?.type === "minLength" && (
-              <p>La contraseña debe tener al menos 6 caracteres</p>
+              <p className="error-message">La contraseña debe tener al menos 6 caracteres</p>
             )}
             {errors.password?.type === "maxLength" && (
-              <p>La contraseña debe tener menos de 20 caracteres</p>
+              <p className="error-message">La contraseña debe tener menos de 20 caracteres</p>
             )}
           </div>
-          <div className="form-group" id="checkBox">
+          <div className="form-group">
+            <label htmlFor="confirmarContrasena">Confirmar Contraseña</label>
+            <div className="password-wrapper">
+              <input
+                className="inputText"
+                type={showConfirmPassword ? "text" : "password"}
+                {...register("confirmPassword", {
+                  required: true,
+                  validate: (value) => value === watch('password') || "Las contraseñas no coinciden",
+                })}
+                id="confirmarContrasena"
+                placeholder="Confirm your password"
+              />
+              <FontAwesomeIcon
+                icon={showConfirmPassword ? faEyeSlash : faEye}
+                className="password-icon"
+                onClick={toggleShowConfirmPassword}
+              />
+            </div>
+            {errors.confirmPassword && (
+              <p className="error-message">{errors.confirmPassword.message}</p>
+            )}
+          </div>
+          <div className="form-group error-checkbox" id="checkBox">
             <input
               type="checkbox"
               {...register("signUpCheckbox", { required: true })}
@@ -144,11 +200,10 @@ const SignUp = () => {
             <label id="checkBoxLabel">
               I agree to the <a id="termsPolicy">terms & policy</a>
             </label>
-
-            {errors.signUpCheckbox?.type === "required" && (
-              <p>Debes aceptar los términos y políticas</p>
-            )}
           </div>
+          {errors.signUpCheckbox?.type === "required" && (
+            <p className="error-message">Debes aceptar los términos y políticas</p>
+          )}
           <button id="botonRegistrarse" type="submit">
             ¡Regístrate!
           </button>
