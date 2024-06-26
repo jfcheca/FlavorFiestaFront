@@ -1,0 +1,113 @@
+.order-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top: 100px;
+}
+
+.order-details .order-summary {
+    width: 100%;
+}
+
+.order-details .print-order {
+    display: flex;
+    justify-content: flex-end; /* Alinea el contenido a la derecha */
+    align-items: center;
+    margin-top: 10px;
+}
+
+.order-details .print-order button {
+    display: flex;
+    align-items: center;
+    background-color: #007bff; /* Color de fondo del botón */
+    color: white; /* Color del texto */
+    border: none;
+    padding: 8px 12px; /* Ajusta el padding según necesites */
+    border-radius: 4px; /* Bordes redondeados */
+    cursor: pointer;
+}
+
+.order-details .print-order button:hover {
+    background-color: #0056b3; /* Cambia el color de fondo al pasar el mouse */
+}
+
+.order-details .print-order p {
+    margin: 0; /* Quita el margen por defecto */
+    margin-right: 10px; /* Espacio entre el texto y el ícono */
+}
+
+.order-details .print-order .print-icon {
+    margin-left: 5px; /* Ajusta el margen entre el texto y el ícono */
+}
+
+.order-details .order-items {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.order-details .order-items table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.order-details .order-items th,
+.order-details .order-items td {
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    text-align: left;
+}
+
+.order-details .order-items th {
+    background-color: #f4f4f4;
+    border-top: none;
+}
+
+.order-details .order-items tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.order-details .order-items tr:hover {
+    background-color: #f1f1f1;
+}
+
+.order-details .subtotal-label {
+    font-weight: bold;
+}
+
+.order-details .purchase-info,
+.order-details .payment-info {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.order-details .purchase-info p,
+.order-details .payment-info p {
+    margin-bottom: 10px;
+}
+
+.order-details .purchase-details,
+.order-details .payment-details {
+    border: 1px solid #000;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.order-details .purchase-details .section,
+.order-details .payment-details .section {
+    margin-top: 10px;
+}
+
+.order-details .purchase-details h4,
+.order-details .payment-details h4 {
+    margin-bottom: 5px;
+    font-size: 1.5em;
+}
+
+.order-details .order-item-img {
+    width: 100px;
+    height: auto;
+}

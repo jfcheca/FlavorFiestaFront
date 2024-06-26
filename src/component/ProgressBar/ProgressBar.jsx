@@ -28,7 +28,7 @@ const ProgressBar = ({ step }) => {
               width={50} 
               height={50} 
               borderRadius="50%" 
-              bgcolor={step >= s.number ? '#3f51b5' : 'gray'}
+              bgcolor={step >= s.number ? '#8FA206' : 'gray'}
               color="white"
               display="flex"
               justifyContent="center"
@@ -48,7 +48,7 @@ const ProgressBar = ({ step }) => {
               left="calc(50% + 25px)" // Alinea a la derecha del círculo actual
               right="calc(-50% + 25px)" // Alinea a la izquierda del círculo siguiente
               height={2}
-              bgcolor={step > s.number ? '#3f51b5' : 'gray'}
+              bgcolor={step > s.number ? '#8FA206' : 'gray'}
               transition="background-color 0.5s ease"
               zIndex={0}
             />

@@ -62,6 +62,10 @@ const HeaderLayout = () => {
     navigate("/MisPedidos"); // 
   };
 
+  const handleFavoritos = () => {
+    navigate("/Favoritos"); // 
+  };
+
   const handleEditarPerfil = () => {
     navigate("/EditarPerfil"); // 
   };
@@ -188,7 +192,7 @@ const HeaderLayout = () => {
       <MenuItem
         onClick={() => {
           // Agrega la lógica para navegar a la página de favoritos
-          handleClose();
+          handleFavoritos();
         }}
         sx={{
           fontFamily: "Poppins",
@@ -208,7 +212,7 @@ const HeaderLayout = () => {
       <MenuItem
         onClick={() => {
           // Agrega la lógica para navegar a la página de mis pedidos
-          handleClose();
+          handleMisPedidos();
         }}
         sx={{
           fontFamily: "Poppins",

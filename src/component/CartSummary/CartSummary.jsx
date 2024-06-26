@@ -3,15 +3,18 @@ import axios from 'axios';
 import { TextField, Typography, Button, Box } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { useOrdenProductos } from '../OrderProductContext/OrderProductContext'; // Asegúrate de ajustar la ruta según donde esté ubicado OrdenProductosProvider
+import { useOrdenProductos } from '../OrderProductContext/OrderProductContext'; // Ajusta la ruta según corresponda
 import { AuthContext } from '../AuthContext/AuthContext';
+import { AppContext } from '../AppContext/AppContext'; // Ajusta la ruta según corresponda
 import API_BASE_URL from "../../config";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { styled } from '@mui/system';
 
 const CartSummary = ({ cartItems, handleQuantityChange, removeItemFromCart, calculateTotal, handleNextStep }) => {
   const { ordenProductos, refreshData } = useOrdenProductos();
   const { usuario } = useContext(AuthContext);
+  const { total, setTotal } = useContext(AppContext); // Usa el contexto combinado
   const [quantities, setQuantities] = useState({});
 
   useEffect(() => {
@@ -23,6 +26,15 @@ const CartSummary = ({ cartItems, handleQuantityChange, removeItemFromCart, calc
       setQuantities(initialQuantities);
     }
   }, [ordenProductos]);
+
+  useEffect(() => {
+    if (ordenProductos && ordenProductos.data) {
+      const newTotal = ordenProductos.data.reduce((acc, ordenProducto) => {
+        return acc + (ordenProducto.producto.precio * quantities[ordenProducto.id]);
+      }, 0);
+      setTotal(newTotal); // Actualiza el total en el contexto
+    }
+  }, [quantities, ordenProductos, setTotal]);
 
   const handleQuantityUpdate = (ordenProducto, quantity) => {
     const { id, id_orden, producto: { id: id_producto, precio } } = ordenProducto;
@@ -53,7 +65,6 @@ const CartSummary = ({ cartItems, handleQuantityChange, removeItemFromCart, calc
         toast.info('Producto actualizado correctamente!', {
           position: "top-right"
         });
-        
         // Aquí puedes manejar la respuesta si es necesario
       })
       .catch(error => {
@@ -66,7 +77,7 @@ const CartSummary = ({ cartItems, handleQuantityChange, removeItemFromCart, calc
     axios.delete(`${API_BASE_URL}/ordenProductos/${id}`)
       .then(response => {
         console.log('Artículo eliminado', response.data);
-        refreshData()
+        refreshData();
         toast.error('Producto eliminado de la orden correctamente!', {
           position: "top-right"
         });
@@ -79,7 +90,7 @@ const CartSummary = ({ cartItems, handleQuantityChange, removeItemFromCart, calc
   };
 
   if (!ordenProductos || !usuario) {
-    return(
+    return (
       <>
         <Typography variant="h4" component="h1" gutterBottom>
           Resumen del pedido
@@ -89,10 +100,13 @@ const CartSummary = ({ cartItems, handleQuantityChange, removeItemFromCart, calc
     );
   }
 
-// Verifica si ordenProductos o ordenProductos.data están definidos antes de calcular el subtotal
-const subtotal = ordenProductos && ordenProductos.data ? ordenProductos.data.reduce((acc, ordenProducto) => {
-  return acc + (ordenProducto.producto.precio * quantities[ordenProducto.id]);
-}, 0) : 0;
+  // Estilos personalizados utilizando `styled`
+  const CustomButton = styled(Button)({
+  backgroundColor: '#8FA206',
+  '&:hover': {
+    backgroundColor: '#8FA206',
+  },
+});
 
   return (
     <>
@@ -128,7 +142,7 @@ const subtotal = ordenProductos && ordenProductos.data ? ordenProductos.data.red
                   </td>
                   <td>${(ordenProducto.producto.precio * quantities[ordenProducto.id]).toFixed(2)}</td>
                   <td>
-                    <Button onClick={() => handleRemoveItem(ordenProducto.id)} startIcon={<FontAwesomeIcon icon={faTrashAlt} />} />
+                    <Button onClick={() => handleRemoveItem(ordenProducto.id)} startIcon={<FontAwesomeIcon icon={faTrashAlt} style={{ color: '#8FA206' }}/>} />
                   </td>
                 </tr>
               ))}
@@ -138,8 +152,8 @@ const subtotal = ordenProductos && ordenProductos.data ? ordenProductos.data.red
       )}
       {ordenProductos.data != null && (
         <>
-          <Typography variant="h6" gutterBottom>SubTotal: ${subtotal.toFixed(2)}</Typography>
-          <Button onClick={handleNextStep} variant="contained" color="primary">Realizar pedido</Button>
+          <Typography variant="h6" gutterBottom>SubTotal: ${total.toFixed(2)}</Typography>
+          <CustomButton onClick={handleNextStep} variant="contained" fullWidth >Realizar pedido</CustomButton>
         </>
       )}
       {/* Contenedor para las notificaciones */}

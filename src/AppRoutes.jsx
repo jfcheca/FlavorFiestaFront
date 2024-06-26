@@ -22,8 +22,11 @@ import Store from './component/store/store';
 import Categoria from './component/categoria/categoria';
 import EditarPerfil from './component/EditarPerfil/EditarPerfil';
 import { ProductProvider } from './component/ProductContext/ProductContext';
+import { AppProvider } from './component/AppContext/AppContext';
 import { OrdenProductosProvider } from './component/OrderProductContext/OrderProductContext';
 import RecipeDetail from "./component/RecipeCard/RecipeDetail";
+import Mispedidos from "./component/Mispedidos/Mispedidos";
+import MisPedidosDetalle from "./component/MisPedidosDetalle/MisPedidosDetalle";
 import PrivateRoute from './PrivateRoute';
 
 const AppRoutes = () => {
@@ -33,6 +36,7 @@ const AppRoutes = () => {
       <OrderProvider>
       <OrdenProductosProvider>
       <CartProvider>
+      <AppProvider>
       <FavoritosProvider>
     <div className="app-container">
       <Routes>
@@ -53,11 +57,14 @@ const AppRoutes = () => {
           <Route path="/EditarPerfil" element={<EditarPerfil />} />
           <Route path="/ActivateAccount/:usuarioId/:token" element={<ConfirmEmail />} />
           <Route path="/Favoritos" element={<Favoritos />} />
+          <Route path="/Mispedidos" element={<Mispedidos />} />
+          <Route path="/mispedidos/:orderId" element={<MisPedidosDetalle />} />
         </Route>
       </Routes>
       <Footer />
     </div>
     </FavoritosProvider>
+    </AppProvider>
     </CartProvider>
     </OrdenProductosProvider>
     </OrderProvider>

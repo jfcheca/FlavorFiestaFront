@@ -30,7 +30,10 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-bottom: 10px; /* Ajusta el espaciado entre los inputs */
+    box-sizing: border-box; /* Asegura que el padding y el borde se incluyan en el ancho total */
 }
+
+
 
 .profile-button {
     width: 100%; /* Ajusta el ancho del botón */

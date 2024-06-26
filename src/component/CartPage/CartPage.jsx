@@ -40,11 +40,11 @@ const CartPage = () => {
             position: 'absolute',
             top: 16,
             left: 16,
-            bgcolor: 'primary.main',
+            bgcolor: '#8FA206',
             marginTop: '85px',
             color: 'white',
             '&:hover': {
-              bgcolor: 'primary.dark',
+              bgcolor: '#6e8a05', // Un tono más oscuro de #8FA206 para el efecto hover
             },
             borderRadius: '50%',
             width: 50,

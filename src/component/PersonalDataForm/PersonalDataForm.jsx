@@ -1,7 +1,49 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { TextField, Typography, Box, Grid, Button } from '@mui/material';
+import { AppContext } from '../AppContext/AppContext'; // Ajusta la ruta según corresponda
+import { styled } from '@mui/system';
 
-const PersonalDataForm = ({ personalData, handlePersonalDataChange, handleNextStep }) => {
+const PersonalDataForm = ({ handleNextStep }) => {
+  const { personalData, setPersonalData } = useContext(AppContext);
+  const [errors, setErrors] = useState({});
+
+  const handlePersonalDataChange = (e) => {
+    const { name, value } = e.target;
+    setPersonalData({
+      ...personalData,
+      [name]: value
+    });
+  };
+
+  const validate = () => {
+    const newErrors = {};
+
+    if (!personalData.nombre) newErrors.nombre = 'El nombre es requerido';
+    if (!personalData.apellido) newErrors.apellido = 'El apellido es requerido';
+    if (!personalData.direccion) newErrors.direccion = 'La dirección es requerida';
+    if (!personalData.apartamento) newErrors.apartamento = 'El apartamento es requerido';
+    if (!personalData.ciudad) newErrors.ciudad = 'La ciudad es requerida';
+    if (!personalData.codigoPostal) newErrors.codigoPostal = 'El código postal es requerido';
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleNextClick = () => {
+    if (validate()) {
+      handleNextStep();
+    }
+  };
+
+// Estilos personalizados utilizando `styled`
+const CustomButton = styled(Button)({
+  backgroundColor: '#8FA206',
+  '&:hover': {
+    backgroundColor: '#8FA206',
+  },
+});
+
   return (
     <>
       <Typography variant="h4" component="h1" gutterBottom>
@@ -18,6 +60,8 @@ const PersonalDataForm = ({ personalData, handlePersonalDataChange, handleNextSt
               onChange={handlePersonalDataChange}
               fullWidth
               margin="normal"
+              error={!!errors.nombre}
+              helperText={errors.nombre}
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -28,6 +72,8 @@ const PersonalDataForm = ({ personalData, handlePersonalDataChange, handleNextSt
               onChange={handlePersonalDataChange}
               fullWidth
               margin="normal"
+              error={!!errors.apellido}
+              helperText={errors.apellido}
             />
           </Grid>
           
@@ -40,6 +86,8 @@ const PersonalDataForm = ({ personalData, handlePersonalDataChange, handleNextSt
               onChange={handlePersonalDataChange}
               fullWidth
               margin="normal"
+              error={!!errors.direccion}
+              helperText={errors.direccion}
             />
           </Grid>
 
@@ -52,6 +100,8 @@ const PersonalDataForm = ({ personalData, handlePersonalDataChange, handleNextSt
               onChange={handlePersonalDataChange}
               fullWidth
               margin="normal"
+              error={!!errors.apartamento}
+              helperText={errors.apartamento}
             />
           </Grid>
           <Grid item xs={12} md={4}>
@@ -62,6 +112,8 @@ const PersonalDataForm = ({ personalData, handlePersonalDataChange, handleNextSt
               onChange={handlePersonalDataChange}
               fullWidth
               margin="normal"
+              error={!!errors.ciudad}
+              helperText={errors.ciudad}
             />
           </Grid>
           <Grid item xs={12} md={4}>
@@ -72,19 +124,20 @@ const PersonalDataForm = ({ personalData, handlePersonalDataChange, handleNextSt
               onChange={handlePersonalDataChange}
               fullWidth
               margin="normal"
+              error={!!errors.codigoPostal}
+              helperText={errors.codigoPostal}
             />
           </Grid>
 
           {/* Fila 4 */}
           <Grid item xs={12}>
-            <Button 
-              variant="contained" 
-              color="primary" 
+            <CustomButton  
+              variant="contained"  
               fullWidth 
-              onClick={handleNextStep}
+              onClick={handleNextClick}
             >
               Siguiente
-            </Button>
+            </CustomButton>
           </Grid>
         </Grid>
       </Box>

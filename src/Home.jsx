@@ -22,7 +22,7 @@ const Home = () => {
         updateProducts(data.data);
       })
       .catch(error => console.error('Error fetching products:', error));
-  }, [updateProducts]);
+  }, []);
 
   useEffect(() => {
     const fetchRecipes = async () => {

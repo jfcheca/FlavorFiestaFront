@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import axios from 'axios';
 import './ContactForm.css';
+import API_BASE_URL from "../../config";
 
 const ContactForm = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
+        asunto: '',
         comment: '',
         how: ''
     });
@@ -24,13 +27,25 @@ const ContactForm = () => {
         return re.test(String(email).toLowerCase());
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const { name, email, comment, how } = formData;
-        if (name && email && comment && how) {
+        const { name, email, asunto, comment, how } = formData;
+        if (name && email && asunto && comment && how) {
             if (validateEmail(email)) {
-                setMessage('Mensaje enviado correctamente');
-                // Aquí va el código para enviar los datos al servidor
+                try {
+                    const response = await axios.post(`${API_BASE_URL}/auth/contactenos`, {
+                        nombre: name,
+                        email: email,
+                        asunto: asunto,
+                        descripcion: comment
+                    });
+                    setMessage('Mensaje enviado correctamente');
+                    setTimeout(() => {
+                        window.location.reload(); // Recargar la página después de 2 segundos
+                    }, 2000);
+                } catch (error) {
+                    setMessage('Error al enviar el mensaje');
+                }
             } else {
                 setMessage('Por favor, ingresa un correo electrónico válido');
             }
@@ -61,6 +76,16 @@ const ContactForm = () => {
                     name="email"
                     placeholder="Email *"
                     value={formData.email}
+                    onChange={handleChange}
+                    required
+                />
+                <label htmlFor="asunto">Asunto</label>
+                <input
+                    type="text"
+                    id="asunto"
+                    name="asunto"
+                    placeholder="Asunto"
+                    value={formData.asunto}
                     onChange={handleChange}
                     required
                 />
@@ -95,4 +120,3 @@ const ContactForm = () => {
 };
 
 export default ContactForm;
-

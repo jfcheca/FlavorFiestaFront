@@ -97,7 +97,7 @@ const EditProfile = () => {
         <label className="profile-label">Nombre:</label>
         <input
           className="profile-input"
-          type="text"
+          type="nombre"
           name="nombre"
           value={formData.nombre}
           onChange={handleChange}

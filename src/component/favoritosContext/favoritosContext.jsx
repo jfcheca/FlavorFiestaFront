@@ -1,25 +1,25 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
-import API_BASE_URL from '../../config';
+// FavoritosContext.js
+
+import React, { createContext, useState, useContext, useEffect } from 'react';
+import API_BASE_URL from "../../config";
 import { AuthContext } from '../AuthContext/AuthContext';
 
-// Creamos el contexto
 export const FavoritosContext = createContext();
 
 const FavoritosContextProvider = ({ children }) => {
   const { usuario } = useContext(AuthContext);
-  // Estado para almacenar los favoritos
   const [favoritos, setFavoritos] = useState([]);
 
   useEffect(() => {
     const obtenerFavoritos = async () => {
       try {
         if (!usuario || !usuario.id) {
-          return; // Si usuario o usuario.id no están definidos, salimos de la función
+          return; // Salir si no hay usuario o usuario.id definido
         }
         const response = await fetch(`${API_BASE_URL}/favoritos/usuario/${usuario.id}`);
         if (response.ok) {
           const data = await response.json();
-          setFavoritos(data); // Actualizamos el estado de los favoritos
+          setFavoritos(data); // Actualizar el estado de los favoritos en el contexto
         } else {
           throw new Error('Error al obtener los favoritos');
         }
@@ -29,11 +29,27 @@ const FavoritosContextProvider = ({ children }) => {
     };
 
     obtenerFavoritos();
-  }, [usuario]); // Dependencia: se ejecuta nuevamente cuando usuario cambia
+  }, [usuario]); // Ejecutar nuevamente cuando cambie usuario
 
-  // El provider que envuelve a los hijos y provee el contexto
+  const actualizarFavoritos = async () => {
+    try {
+      if (!usuario || !usuario.id) {
+        return; // Salir si no hay usuario o usuario.id definido
+      }
+      const response = await fetch(`${API_BASE_URL}/favoritos/usuario/${usuario.id}`);
+      if (response.ok) {
+        const data = await response.json();
+        setFavoritos(data); // Actualizar el estado de los favoritos en el contexto
+      } else {
+        throw new Error('Error al obtener los favoritos');
+      }
+    } catch (error) {
+      console.error('Error fetching favoritos:', error);
+    }
+  };
+
   return (
-    <FavoritosContext.Provider value={{ favoritos }}>
+    <FavoritosContext.Provider value={{ favoritos, actualizarFavoritos }}>
       {children}
     </FavoritosContext.Provider>
   );
