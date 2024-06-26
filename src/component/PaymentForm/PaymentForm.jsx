@@ -17,6 +17,7 @@ function PaymentForm() {
   const { ordenProductos, refreshData } = useOrdenProductos();
   const { total, personalData } = useContext(AppContext);
   const navigate = useNavigate();
+  console.log(ordenProductos)
 
   const [cardInfo, setCardInfo] = useState({
     cvc: '',
@@ -89,7 +90,7 @@ function PaymentForm() {
       const encryptedExpiry = CryptoJS.SHA256(cardInfo.expiry).toString();
 
       // PUT request to update order
-      await fetch(`${API_BASE_URL}/ordenes/${ordenProductos.data[0].id}`, {
+      await fetch(`${API_BASE_URL}/ordenes/${ordenProductos.data[0].id_orden}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -149,7 +150,7 @@ function PaymentForm() {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            id_orden: ordenProductos.data[0].id,
+            id_orden: ordenProductos.data[0].id_orden,
             id_datosenvio: shippingData.data.id,
             id_tarjeta: cardData.id,
           }),
